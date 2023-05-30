@@ -80,7 +80,7 @@ before_show_menu() {
 }
 
 install() {
-    bash <(curl -Ls https://raw.githubusercontents.com/Yuzuki616/V2bX-script/master/install.sh)
+    bash <(curl -Ls https://raw.githubusercontents.com/cubemaze/V2bX-script/master/install.sh)
     if [[ $? == 0 ]]; then
         if [[ $# == 0 ]]; then
             start
@@ -96,7 +96,7 @@ update() {
     else
         version=$2
     fi
-    bash <(curl -Ls https://raw.githubusercontents.com/Yuzuki616/V2bX-script/master/install.sh) $version
+    bash <(curl -Ls https://raw.githubusercontents.com/cubemaze/V2bX-script/master/install.sh) $version
     if [[ $? == 0 ]]; then
         echo -e "${green}更新完成，已自动重启 V2bX，请使用 V2bX log 查看运行日志${plain}"
         exit
@@ -249,7 +249,7 @@ install_bbr() {
 }
 
 update_shell() {
-    wget -O /usr/bin/V2bX -N --no-check-certificate https://raw.githubusercontents.com/Yuzuki616/V2bX-script/master/V2bX.sh
+    wget -O /usr/bin/V2bX -N --no-check-certificate https://raw.githubusercontents.com/cubemaze/V2bX-script/master/V2bX.sh
     if [[ $? != 0 ]]; then
         echo ""
         echo -e "${red}下载脚本失败，请检查本机能否连接 Github${plain}"
@@ -332,6 +332,15 @@ show_enable_status() {
         echo -e "是否开机自启: ${green}是${plain}"
     else
         echo -e "是否开机自启: ${red}否${plain}"
+    fi
+}
+
+generate_x25519_key() {
+    echo -n "正在生成 x25519 密钥："
+    /usr/local/V2bX/V2bX -x25519
+    echo ""
+    if [[ $# == 0 ]]; then
+        before_show_menu
     fi
 }
 
@@ -471,7 +480,7 @@ show_usage() {
 show_menu() {
     echo -e "
   ${green}V2bX 后端管理脚本，${plain}${red}不适用于docker${plain}
---- https://github.com/Yuzuki616/V2bX ---
+--- https://github.com/cubemaze/V2bX ---
   ${green}0.${plain} 修改配置
 ————————————————
   ${green}1.${plain} 安装 V2bX
@@ -488,14 +497,15 @@ show_menu() {
  ${green}10.${plain} 取消 V2bX 开机自启
 ————————————————
  ${green}11.${plain} 一键安装 bbr (最新内核)
- ${green}12.${plain} 查看 V2bX 版本 
- ${green}13.${plain} 升级 V2bX 维护脚本
- ${green}14.${plain} 生成 V2bX 配置文件
- ${green}15.${plain} 放行 VPS 的所有网络端口
+ ${green}12.${plain} 查看 V2bX 版本
+ ${green}13.${plain} 生产 V2bX 版本
+ ${green}14.${plain} 升级 V2bX 维护脚本
+ ${green}15.${plain} 生成 X25519 密钥
+ ${green}16.${plain} 放行 VPS 的所有网络端口
  "
  #后续更新可加入上方字符串中
     show_status
-    echo && read -rp "请输入选择 [0-14]: " num
+    echo && read -rp "请输入选择 [0-17]: " num
 
     case "${num}" in
         0) config ;;
@@ -511,10 +521,12 @@ show_menu() {
         10) check_install && disable ;;
         11) install_bbr ;;
         12) check_install && show_V2bX_version ;;
-        13) update_shell ;;
-        14) generate_config_file ;;
-        15) open_ports ;;
-        *) echo -e "${red}请输入正确的数字 [0-14]${plain}" ;;
+        13) check_install && generate_x25519_key ;;
+        14) update_shell ;;
+        15) generate_x25519_key ;;
+        16) generate_config_file ;;
+        17) open_ports ;;
+        *) echo -e "${red}请输入正确的数字 [0-17]${plain}" ;;
     esac
 }
 
@@ -533,6 +545,7 @@ if [[ $# > 0 ]]; then
         "generate") generate_config_file ;;
         "install") check_uninstall 0 && install 0 ;;
         "uninstall") check_install 0 && uninstall 0 ;;
+        "x25519") check_install 0 && generate_x25519_key 0 ;;
         "version") check_install 0 && show_V2bX_version 0 ;;
         "update_shell") update_shell ;;
         *) show_usage
