@@ -29,6 +29,8 @@ export CF_Token=$cf_token
 # Create directory for certificates
 mkdir -p $certs_dir/$domain_name
 
+bash
+
 # Issue certificate
 acme.sh --issue --dns dns_cf -d $domain_name
 
