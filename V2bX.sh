@@ -337,7 +337,7 @@ show_enable_status() {
 
 generate_x25519_key() {
     echo -n "正在生成 x25519 密钥："
-    /usr/local/V2bX/V2bX -x25519
+    /usr/local/V2bX/V2bX x25519
     echo ""
     if [[ $# == 0 ]]; then
         before_show_menu
@@ -346,7 +346,7 @@ generate_x25519_key() {
 
 show_V2bX_version() {
     echo -n "V2bX 版本："
-    /usr/local/V2bX/V2bX -version
+    /usr/local/V2bX/V2bX version
     echo ""
     if [[ $# == 0 ]]; then
         before_show_menu
@@ -495,14 +495,14 @@ show_menu() {
   ${green}8.${plain} 查看 V2bX 日志
 ————————————————
   ${green}9.${plain} 设置 V2bX 开机自启
- ${green}10.${plain} 取消 V2bX 开机自启
+  ${green}10.${plain} 取消 V2bX 开机自启
 ————————————————
- ${green}11.${plain} 一键安装 bbr (最新内核)
- ${green}12.${plain} 查看 V2bX 版本
- ${green}13.${plain} 生成 X25519 密钥
- ${green}14.${plain} 升级 V2bX 维护脚本
- ${green}15.${plain} 生成 V2bX 配置文件
- ${green}16.${plain} 放行 VPS 的所有网络端口
+  ${green}11.${plain} 一键安装 bbr (最新内核)
+  ${green}12.${plain} 查看 V2bX 版本
+  ${green}13.${plain} 生成 X25519 密钥
+  ${green}14.${plain} 升级 V2bX 维护脚本
+  ${green}15.${plain} 生成 V2bX 配置文件
+  ${green}16.${plain} 放行 VPS 的所有网络端口
  "
  #后续更新可加入上方字符串中
     show_status
