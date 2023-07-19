@@ -468,6 +468,7 @@ show_usage() {
     echo "V2bX enable       - 设置 V2bX 开机自启"
     echo "V2bX disable      - 取消 V2bX 开机自启"
     echo "V2bX log          - 查看 V2bX 日志"
+    echo "V2bX x25519       - 生成 x25519 密钥"
     echo "V2bX generate     - 生成 V2bX 配置文件"
     echo "V2bX update       - 更新 V2bX"
     echo "V2bX update x.x.x - 安装 V2bX 指定版本"
@@ -498,14 +499,14 @@ show_menu() {
 ————————————————
  ${green}11.${plain} 一键安装 bbr (最新内核)
  ${green}12.${plain} 查看 V2bX 版本
- ${green}13.${plain} 生产 V2bX 版本
+ ${green}13.${plain} 生成 X25519 密钥
  ${green}14.${plain} 升级 V2bX 维护脚本
- ${green}15.${plain} 生成 X25519 密钥
+ ${green}15.${plain} 生成 V2bX 配置文件
  ${green}16.${plain} 放行 VPS 的所有网络端口
  "
  #后续更新可加入上方字符串中
     show_status
-    echo && read -rp "请输入选择 [0-17]: " num
+    echo && read -rp "请输入选择 [0-16]: " num
 
     case "${num}" in
         0) config ;;
@@ -523,9 +524,8 @@ show_menu() {
         12) check_install && show_V2bX_version ;;
         13) check_install && generate_x25519_key ;;
         14) update_shell ;;
-        15) generate_x25519_key ;;
-        16) generate_config_file ;;
-        17) open_ports ;;
+        15) generate_config_file ;;
+        16) open_ports ;;
         *) echo -e "${red}请输入正确的数字 [0-17]${plain}" ;;
     esac
 }

@@ -189,6 +189,7 @@ install_V2bX() {
     echo "V2bX enable       - 设置 V2bX 开机自启"
     echo "V2bX disable      - 取消 V2bX 开机自启"
     echo "V2bX log          - 查看 V2bX 日志"
+    echo "V2bX x25519       - 生成 x25519 密钥"
     echo "V2bX generate     - 生成 V2bX 配置文件"
     echo "V2bX update       - 更新 V2bX"
     echo "V2bX update x.x.x - 更新 V2bX 指定版本"
