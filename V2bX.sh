@@ -249,7 +249,7 @@ install_bbr() {
 }
 
 update_shell() {
-    wget -O /usr/bin/V2bX -N --no-check-certificate https://raw.githubusercontents.com/cubemaze/V2bX-script/master/V2bX.sh
+    wget -O /usr/bin/V2bX -U 'Mozilla/5.0 (X11; Linux x86_64; rv:30.0) Gecko/20100101 Firefox/30.0' -N --no-check-certificate https://raw.githubusercontents.com/cubemaze/V2bX-script/master/V2bX.sh
     if [[ $? != 0 ]]; then
         echo ""
         echo -e "${red}下载脚本失败，请检查本机能否连接 Github${plain}"
