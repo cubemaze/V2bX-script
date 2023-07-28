@@ -117,10 +117,10 @@ install_V2bX() {
     else
         last_version=$1
         url="https://github.com/cubemaze/V2bX/releases/download/${last_version}/V2bX-linux-${arch}.zip"
-        echo -e "开始安装 V2bX v$1"
+        echo -e "开始安装 V2bX $1"
         wget -q -N --no-check-certificate -O /usr/local/V2bX/V2bX-linux.zip ${url}
         if [[ $? -ne 0 ]]; then
-            echo -e "${red}下载 V2bX v$1 失败，请确保此版本存在${plain}"
+            echo -e "${red}下载 V2bX $1 失败，请确保此版本存在${plain}"
             exit 1
         fi
     fi
