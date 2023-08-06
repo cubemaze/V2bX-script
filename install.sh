@@ -159,6 +159,9 @@ install_V2bX() {
     if [[ ! -f /etc/V2bX/dns.json ]]; then
         cp dns.json /etc/V2bX/
     fi
+    if [[ ! -f /etc/V2bX/sdns.json ]]; then
+            cp sdns.json /etc/V2bX/
+        fi
     if [[ ! -f /etc/V2bX/route.json ]]; then
         cp route.json /etc/V2bX/
     fi
